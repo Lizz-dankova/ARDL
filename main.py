@@ -253,8 +253,8 @@ def load_excel_data():
     rename_dict = {
         "Government expenditure on education, total (% of GDP)": "Education",
         "GERD as a percentage of GDP": "GERD",
-        "Винаходи": "Inventions"
-        #"Винаходи абс значення": "Inventions"
+        #"Винаходи": "Inventions"
+        "Винаходи абс значення": "Inventions"
         #оберіть. Винаходи - статистично незначущі показники, але лонг ран значущі, винаходи абс,
         # (1_1_1) статистично значущі при незначущих лонг ран.
     }
