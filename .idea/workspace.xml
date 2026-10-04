@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d57af03-fc44-4e38-80b8-2c546991ae0b" name="Changes" comment=" it export as y p value beeeee">
+    <list default="true" id="5d57af03-fc44-4e38-80b8-2c546991ae0b" name="Changes" comment="inventions meth change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/export.py" beforeDir="false" afterPath="$PROJECT_DIR$/export.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,6 +47,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.export.executor": "Run",
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master"
@@ -91,14 +93,23 @@
       <option name="project" value="LOCAL" />
       <updated>1790882524698</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="inventions meth change">
+      <option name="closed" value="true" />
+      <created>1791129603227</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1791129603227</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="innovation as y" />
     <MESSAGE value="innovation as y n" />
     <MESSAGE value=" it export as y p value beeeee" />
-    <option name="LAST_COMMIT_MESSAGE" value=" it export as y p value beeeee" />
+    <MESSAGE value="inventions meth change" />
+    <option name="LAST_COMMIT_MESSAGE" value="inventions meth change" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

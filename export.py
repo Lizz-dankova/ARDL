@@ -91,8 +91,8 @@ def print_final_ardl_equation(result, p, q_education, q_gerd):
     # --------------------------------------------------------
     print("\nЗагальний вигляд моделі:")
     print(
-        f"IT_exports_t = "
-        f"f(IT_exports_(t-1), Education_(t-{q_education}), "
+        f"Inventions_t = "
+        f"f(Inventions_(t-1), Education_(t-{q_education}), "
         f"GERD_(t-{q_gerd}))"
     )
 
@@ -101,19 +101,19 @@ def print_final_ardl_equation(result, p, q_education, q_gerd):
     # --------------------------------------------------------
     print("\nЧислове рівняння:")
 
-    equation = f"IT_exports_t = {params['const']:.6f}"
+    equation = f"Inventions_t = {params['const']:.6f}"
 
     # Лаги залежної змінної
     for lag in range(1, p + 1):
-        name = f"IT_exports.L{lag}"
+        name = f"Inventions.L{lag}"
 
         if name in params.index:
             coef = params[name]
 
             if coef >= 0:
-                equation += f" + {coef:.6f}·IT_exports_(t-{lag})"
+                equation += f" + {coef:.6f}·Inventions_(t-{lag})"
             else:
-                equation += f" - {abs(coef):.6f}·IT_exports_(t-{lag})"
+                equation += f" - {abs(coef):.6f}·Inventions_(t-{lag})"
 
     # Education
     for lag in range(0, q_education + 1):
@@ -254,7 +254,8 @@ def load_excel_data():
     rename_dict = {
         "Government expenditure on education, total (% of GDP)": "Education",
         "GERD as a percentage of GDP": "GERD",
-        "Information technology exports, percent of total goods exports": "IT_exports"
+        #"Information technology exports, percent of total goods exports": "IT_exports"
+        "Винаходи": "Inventions"
     }
 
     data = data.rename(columns=rename_dict)
@@ -263,7 +264,7 @@ def load_excel_data():
         "Year",
         "Education",
         "GERD",
-        "IT_exports"
+        "Inventions"
     ]
 
     missing = [
@@ -365,7 +366,8 @@ def load_excel_data():
                 "Year",
                 "Education",
                 "GERD",
-                "IT_exports"
+                "Inventions"
+
             ]
         ].to_string(index=False)
     )
@@ -459,7 +461,7 @@ def descriptive_statistics(data):
     variables = [
         "Education",
         "GERD",
-        "IT_exports"
+        "Inventions"
     ]
 
     desc = data[variables].describe().T
@@ -498,7 +500,7 @@ def plot_time_series(data):
     variables = [
         "Education",
         "GERD",
-        "IT_exports"
+        "Inventions"
     ]
 
     os.makedirs("ARDL_results", exist_ok=True)
@@ -554,7 +556,7 @@ def correlation_analysis(data):
     print("=" * 100)
 
     variables = [
-        "IT_exports",
+        "Inventions",
         "Education",
         "GERD"
     ]
@@ -892,7 +894,7 @@ def unit_root_tests(data):
     print("=" * 100)
 
     variables = [
-        "IT_exports",
+        "Inventions",
         "Education",
         "GERD"
     ]
@@ -955,7 +957,7 @@ def first_difference_tests(data):
     print("=" * 100)
 
     variables = [
-        "IT_exports",
+        "Inventions",
         "Education",
         "GERD"
     ]
@@ -1034,7 +1036,7 @@ I(0) або I(1), але не I(2).
     )
 
     variables = [
-        "IT_exports",
+        "Inventions",
         "Education",
         "GERD"
     ]
@@ -1235,7 +1237,7 @@ def integration_summary(
     print("=" * 100)
 
     variables = [
-        "IT_exports",
+        "Inventions",
         "Education",
         "GERD"
     ]
@@ -1424,7 +1426,7 @@ def acf_pacf_analysis(data):
     print("9. ACF / PACF")
     print("=" * 100)
 
-    series = data["IT_exports"].dropna()
+    series = data["Inventions"].dropna()
 
     max_lag = min(
         10,
@@ -1468,7 +1470,7 @@ def acf_pacf_analysis(data):
     )
 
     plt.title(
-        "ACF of IT_exports"
+        "ACF of Inventions"
     )
 
     plt.xlabel("Lag")
@@ -1482,7 +1484,7 @@ def acf_pacf_analysis(data):
     plt.tight_layout()
 
     plt.savefig(
-        "ARDL_results/ACF_IT_exports.png",
+        "ARDL_results/ACF_Inventions.png",
         dpi=300
     )
 
@@ -1497,7 +1499,7 @@ def acf_pacf_analysis(data):
     )
 
     plt.title(
-        "PACF of IT_exports"
+        "PACF of Inventions"
     )
 
     plt.xlabel("Lag")
@@ -1511,7 +1513,7 @@ def acf_pacf_analysis(data):
     plt.tight_layout()
 
     plt.savefig(
-        "ARDL_results/PACF_IT_exports.png",
+        "ARDL_results/PACF_Inventions.png",
         dpi=300
     )
 
@@ -1537,7 +1539,7 @@ def ardl_lag_search(
     print("=" * 100)
 
     y = data[
-        "IT_exports"
+        "Inventions"
     ]
 
     X = data[
@@ -1774,7 +1776,7 @@ def manual_lag_selection():
         """
 Введіть лаги для остаточної моделі.
 
-p  = лаг залежної змінної IT_exports
+p  = лаг залежної змінної Inventions
 q1 = лаг Education
 q2 = лаг GERD
 
@@ -1860,7 +1862,7 @@ def fit_ardl(
     )
 
     y = data[
-        "IT_exports"
+        "Inventions"
     ]
 
     X = data[
@@ -2232,13 +2234,13 @@ def long_run_analysis(
         # 3. Коефіцієнт при лагованій залежній змінній
         # ----------------------------------------------------
 
-        y_lag_name = "IT_exports.L1"
+        y_lag_name = "Inventions.L1"
 
         if y_lag_name not in params.index:
 
             print(
                 "\nПомилка: не знайдено коефіцієнт "
-                "IT_exports.L1."
+                "Inventions.L1."
             )
 
             return None
@@ -2255,7 +2257,7 @@ def long_run_analysis(
             )
 
             print(
-                "1 - коефіцієнт IT_exports.L1 "
+                "1 - коефіцієнт Inventions.L1 "
                 "занадто близький до нуля."
             )
 
@@ -2415,7 +2417,7 @@ def long_run_analysis(
         )
 
         print(
-            "\nIT_exports = "
+            "\nInventions = "
             f"{lr_const:.6f}"
             f" {lr_education:+.6f} * Education"
             f" {lr_gerd:+.6f} * GERD"
@@ -2508,7 +2510,7 @@ def long_run_analysis(
         print(
             "Наведені вище коефіцієнти є економічними "
             "довгостроковими ефектами, отриманими шляхом "
-            "нормалізації рівняння відносно IT_exports."
+            "нормалізації рівняння відносно Inventions."
         )
 
         print(
@@ -2591,7 +2593,7 @@ def ecm_analysis(
             name
             for name in uecm_result.params.index
             if (
-                name.startswith("IT_exports.L1")
+                name.startswith("Inventions.L1")
             )
         ]
 
@@ -3099,12 +3101,12 @@ def actual_vs_fitted(
                 fitted.index,
                 "Year"
             ],
-            "Actual_IT_exports":
+            "Actual_Inventions":
                 data.loc[
                     fitted.index,
-                    "IT_exports"
+                    "Inventions"
                 ],
-            "Fitted_IT_exports":
+            "Fitted_Inventions":
                 fitted
         }
     )
@@ -3119,20 +3121,20 @@ def actual_vs_fitted(
 
     plt.plot(
         comparison["Year"],
-        comparison["Actual_IT_exports"],
+        comparison["Actual_Inventions"],
         marker="o",
         label="Actual"
     )
 
     plt.plot(
         comparison["Year"],
-        comparison["Fitted_IT_exports"],
+        comparison["Fitted_Inventions"],
         marker="o",
         label="Fitted"
     )
 
     plt.xlabel("Year")
-    plt.ylabel("IT_exports")
+    plt.ylabel("Inventions")
 
     plt.title(
         "Actual vs Fitted values"
