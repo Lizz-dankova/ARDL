@@ -1,3 +1,4 @@
+
 # ============================================================
 # ARDL ECONOMETRIC ANALYSIS
 # ============================================================
@@ -253,6 +254,9 @@ def load_excel_data():
         "Government expenditure on education, total (% of GDP)": "Education",
         "GERD as a percentage of GDP": "GERD",
         "Винаходи": "Inventions"
+        #"Винаходи абс значення": "Inventions"
+        #оберіть. Винаходи - статистично незначущі показники, але лонг ран значущі, винаходи абс,
+        # (1_1_1) статистично значущі при незначущих лонг ран.
     }
 
     data = data.rename(columns=rename_dict)
